@@ -10,6 +10,7 @@
   <Namespace>Refit</Namespace>
   <Namespace>System</Namespace>
   <Namespace>System.Collections.Generic</Namespace>
+  <Namespace>System.Collections.ObjectModel</Namespace>
   <Namespace>System.ComponentModel.DataAnnotations</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
@@ -21,9 +22,10 @@
 
 #region Imports
 
-// Namespace Imports - .Net FrameworkL
+// Namespace Imports - .Net Framework:
 // System
 // System.Collections.Generic
+// System.Collections.ObjectModel
 // System.ComponentModel.DataAnnotations
 // System.Net.Http
 // System.Threading.Tasks
@@ -35,30 +37,24 @@
 
 #endregion
 
-#region View in MVVM (Page in Xamarin.Forms)
+#region View in MVVM
 
 void Main()
 {
+	// Global values (App.xaml.cs or App.cs)
 	CodeCampDataService dataService = new CodeCampDataService();
+	// BREAKPOINT
 	NextLevelFormsViewModel viewModel = new NextLevelFormsViewModel(dataService);
 
-	// BREAKPOINT
-	viewModel.GetSessionsCommand.Execute(null);
-
-	// ActivityIndicator in UI (NO BREAKPOINT)
+	// NO BREAKPOINT
+	// View: ActivityIndicator on Page in Xamarin.Forms
 	while (viewModel.IsWaiting)	{}
 
 	// BREAKPOINT
-	var filterText = "Xamarin";
-	var filterTextLower = filterText.ToLower();
-	var filteredSessions = viewModel.ContentSessions
-			.Where(s => s.Name.ToLower().Contains(filterTextLower)
-				|| s.Description.ToLower().Contains(filterTextLower)
-				|| (s.KeyWords != null && s.KeyWords.ToLower().Contains(filterTextLower))
-			)
-			.ToList();
-	filteredSessions.Count().Dump($"# of {filterText} sessions");
-	filteredSessions.Dump(exclude: "Special,SpeakerId,TimeslotId,TrackId");
+	viewModel.FilterSessionsCommand.Execute("Xamarin");
+
+	// BREAKPOINT
+	viewModel.FilterSessionsCommand.Execute("Forms");
 }
 
 #endregion
@@ -116,14 +112,54 @@ public class NextLevelFormsViewModel
 {
 	private readonly CodeCampDataService DataService;
 
+	private IList<Session> _contentSessions { get; set;} = new List<Session>();
+
 	public NextLevelFormsViewModel(CodeCampDataService dataService)
 	{
 		DataService = dataService;
+
+		// BREAKPOINT
+		GetSessionsCommand.Execute(null);
 	}
 
-	public IList<Session> ContentSessions { get; set; }
+	public ObservableCollection<Session> FilteredSessions { get; set; } 
+		= new ObservableCollection<Session>();
 
 	public bool IsWaiting { get; set; }
+
+	public Command<string> FilterSessionsCommand =>
+		new Command<string>(filterText =>
+		{
+			// BREAKPOINT
+			IsWaiting = true;
+			FilterSessionsCommand.ChangeCanExecute();
+
+			// Filter IList<Session> from API by filter text (in memory => fast for small # of Sessions)
+			var _filterTextLower = filterText.ToLower();
+			// HACK Doesn't do word or regex match => can lead to false-positive results
+			var _filteredSessions = _contentSessions
+				.Where(s => 
+					s.Name.ToLower().Contains(_filterTextLower)
+					|| s.Description.ToLower().Contains(_filterTextLower)
+					|| (s.KeyWords != null && s.KeyWords.ToLower().Contains(_filterTextLower))
+				)
+				.ToList();
+
+			// Load into ObservableCollection<Session> for View (in memory => fast for small # of Sessions)
+			FilteredSessions.Clear();
+			foreach (var sessions in _filteredSessions)
+			{
+				FilteredSessions.Add(sessions);
+			}
+
+			FilteredSessions.Count().Dump($"# of {filterText} sessions");
+			FilteredSessions.Dump(exclude: "Special,SpeakerId,TimeslotId,TrackId");
+
+			// BREAKPOINT
+			IsWaiting = false;
+			FilterSessionsCommand.ChangeCanExecute();
+		},
+		filterText => !IsWaiting);
 
 	public Command GetSessionsCommand =>
 		new Command(async () =>
@@ -132,7 +168,17 @@ public class NextLevelFormsViewModel
 			IsWaiting = true;
 			GetSessionsCommand.ChangeCanExecute();
 
-			ContentSessions = await DataService.GetSessions();
+			// BREAKPOINT
+			// Get sessions from API (service call => most time-consuming operation)
+			_contentSessions = await DataService.GetSessions();
+
+			// BREAKPOINT
+			// Load into ObservableCollection<Session> for View (in memory => fast for small # of Sessions)
+			FilteredSessions.Clear();
+			foreach (var sessions in _contentSessions)
+			{
+				FilteredSessions.Add(sessions);
+			}
 
 			// BREAKPOINT
 			IsWaiting = false;
