@@ -1,0 +1,150 @@
+{
+	"info": {
+		"name": "Orlando Code Camp",
+		"_postman_id": "c7813902-00f6-1b1b-e536-4b1477d4f938",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AnnouncementList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/AnnouncementList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"AnnouncementList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "EventDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/EventDetails",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"EventDetails"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SessionList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/SessionList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"SessionList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SpeakerList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/SpeakerList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"SpeakerList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SponsorList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/SponsorList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"SponsorList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TimeslotList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/TimeslotList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"TimeslotList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "TrackList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{code-camp-url}}/api/TrackList",
+					"host": [
+						"{{code-camp-url}}"
+					],
+					"path": [
+						"api",
+						"TrackList"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
