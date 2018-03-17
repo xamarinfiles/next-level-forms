@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextLevelForms.Android", "NextLevelForms\NextLevelForms.Android\NextLevelForms.Android.csproj", "{723F11CD-227C-47BF-A677-29277B73BF95}"
 EndProject
@@ -245,7 +245,8 @@ Global
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|x64.ActiveCfg = Debug|iPhone
-		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|x86.ActiveCfg = Debug|iPhone
+		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
+		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Debug|x86.Build.0 = Debug|iPhoneSimulator
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Release|Any CPU.ActiveCfg = Release|iPhone
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Release|ARM.ActiveCfg = Release|iPhone
 		{C48516F7-721F-490F-AE3D-AF03BE1A89C2}.Release|iPhone.ActiveCfg = Release|iPhone
@@ -257,5 +258,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43F6DFFC-D451-46D5-94F0-F6B179FCAC93}
 	EndGlobalSection
 EndGlobal

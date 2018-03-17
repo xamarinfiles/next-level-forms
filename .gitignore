@@ -286,3 +286,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/NextLevelForms/NextLevelForms.Android/NextLevelForms.Android.csproj.bak
